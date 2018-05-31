@@ -11,17 +11,23 @@ public class IntArrayList implements IntList {
 
     @Override
     public void add(int element) {
+        add(element);
+        size++;
 
     }
 
     @Override
     public void add(int index, int element) {
+        for (int i = index; i < arr.length; i++) {
+            arr[index] = arr[index + 1];
+        }
+        add(arr[index] = element);
 
     }
 
     @Override
     public void clear() {
-
+        size = 0;
     }
 
     @Override
