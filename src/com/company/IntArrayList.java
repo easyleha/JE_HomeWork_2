@@ -3,7 +3,8 @@ package com.company;
 public class IntArrayList implements IntList {
 
     private static int size = 0;
-    private static int[] arr = new int[10];
+    private static int sizeArr = 10;
+    private static int[] arr = new int[sizeArr];
 
     public static void main(String[] args) {
 
@@ -13,6 +14,9 @@ public class IntArrayList implements IntList {
     public void add(int element) {
         add(element);
         size++;
+        if (size > arr.length) {
+            sizeArr = sizeArr * 3 / 2 + 1;
+        }
 
     }
 
@@ -22,6 +26,9 @@ public class IntArrayList implements IntList {
             arr[index] = arr[index + 1];
         }
         add(arr[index] = element);
+        if (size > arr.length) {
+            sizeArr = sizeArr * 3 / 2 + 1;
+        }
 
     }
 
