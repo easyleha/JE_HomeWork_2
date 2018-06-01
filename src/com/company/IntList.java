@@ -7,7 +7,7 @@ public interface IntList {
 
     void clear();
 
-    void  contains(int value);
+    boolean  contains(int value);
 
     int get(int index);
 
