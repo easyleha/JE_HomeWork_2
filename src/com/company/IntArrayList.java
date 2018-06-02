@@ -1,34 +1,37 @@
 package com.company;
 
+
 public class IntArrayList implements IntList {
 
     private static int size = 0;
     private static int sizeArr = 10;
     private static int[] arr = new int[sizeArr];
 
-    public static void main(String[] args) {
-
+    public IntArrayList() {
     }
 
     @Override
     public void add(int element) {
-        add(element);
-        size++;
         if (size > arr.length) {
             sizeArr = sizeArr * 3 / 2 + 1;
         }
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = element;
+        }
+        size++;
 
     }
 
     @Override
     public void add(int index, int element) {
+        if (size > arr.length) {
+            sizeArr = sizeArr * 3 / 2 + 1;
+        }
         for (int i = index; i < arr.length; i++) {
             arr[index] = arr[index + 1];
         }
         add(arr[index] = element);
-        if (size > arr.length) {
-            sizeArr = sizeArr * 3 / 2 + 1;
-        }
+
 
     }
 
@@ -52,10 +55,14 @@ public class IntArrayList implements IntList {
 
     @Override
     public int get(int index) {
+        if (index > size) {
+            break;
+        }
         int element;
         for (int i = 0; i < arr.length; i++) {
             element = arr[index];
         }
+
         return arr[index];
     }
 
@@ -71,8 +78,9 @@ public class IntArrayList implements IntList {
     public void remove(int index) {
         for (int i = 0; i <= arr.length; i++) {
             arr[index] = 0;
+            arr[index] = arr[arr.length];
         }
-        arr[index] = arr[arr.length];
+
         size--;
     }
 
@@ -89,6 +97,9 @@ public class IntArrayList implements IntList {
 
     @Override
     public void set(int index, int element) {
+        if (index > size) {
+            return;
+        }
         for (int i = 0; i <= arr.length; i++) {
             arr[index] = element;
         }
