@@ -55,12 +55,13 @@ public class IntArrayList implements IntList {
 
     @Override
     public int get(int index) {
-        if (index > size) {
-            break;
-        }
-        int element;
         for (int i = 0; i < arr.length; i++) {
-            element = arr[index];
+            if(i == index){
+                arr[i] = arr[index];
+            }
+            if (index > size) {
+                break;
+            }
         }
 
         return arr[index];
@@ -76,11 +77,9 @@ public class IntArrayList implements IntList {
 
     @Override
     public void remove(int index) {
-        for (int i = 0; i <= arr.length; i++) {
-            arr[index] = 0;
-            arr[index] = arr[arr.length];
-        }
 
+        arr[index] = 0;
+        arr[index] = arr[arr.length];
         size--;
     }
 
