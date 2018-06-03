@@ -13,11 +13,13 @@ public interface IntList {
 
     boolean isEmpty();
 
-    void remove(int index);
+    boolean remove(int index);
 
-    void removeElement(int element);
+    boolean removeElement(int element);
 
     void set(int index, int element);
 
     int size();
+
+    String toString();
 }

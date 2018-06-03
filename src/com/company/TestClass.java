@@ -1,34 +1,23 @@
 package com.company;
 
 
+
+
 public class TestClass {
     public static void main(String[] args) {
 
         IntArrayList list = new IntArrayList();
-        list.add(5);
-        list.add(3);
 
 
-
-        System.out.println("size: " + list.size());
-
-        System.out.println("isEmpty: " + list.isEmpty());
-
-        System.out.println("contains: " + list.contains(4));
-
-        System.out.println("get: " + list.get(0));
-
-        list.remove(0);
-
-        list.removeElement(4);
-
-        System.out.println("size: " + list.size());
-
-        list.set(5, 10);
-        list.clear();
-        System.out.println("size: " + list.size());
-
-
-
+        for (int i = 0; i <20 ; i++) {
+            list.add(i);
+        }
+        System.out.println(list);
+//        boolean  contains(int value);
+        list.set(1, 100);
+        list.set(0, 100);
+        System.out.println(list);
+        System.out.println(list.contains(1));
+        System.out.println(list.contains(0));
     }
 }

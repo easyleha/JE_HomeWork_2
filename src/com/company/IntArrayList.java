@@ -3,36 +3,50 @@ package com.company;
 
 public class IntArrayList implements IntList {
 
-    private static int size = 0;
-    private static int sizeArr = 10;
-    private static int[] arr = new int[sizeArr];
+    private static int size;
+    private static int[] arr = new int[10];
 
     public IntArrayList() {
     }
 
     @Override
     public void add(int element) {
-        if (size > arr.length) {
-            sizeArr = sizeArr * 3 / 2 + 1;
+        if (size >= arr.length) {
+            resize();
         }
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = element;
+        arr[size] = element;
+        size++;
+
+    }
+
+
+    @Override
+    public void add(int index, int element) {
+        if (size >= arr.length) {
+            resize();
+        }
+
+        if (index < 0 || index > arr.length - 1) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            int[] tmp = arr;
+            arr = new int[tmp.length + 1];
+            System.arraycopy(tmp, 0, arr, 0, index);
+            arr[index] = element;
+            System.arraycopy(tmp, index, arr, index + 1, tmp.length - index);
         }
         size++;
 
     }
 
-    @Override
-    public void add(int index, int element) {
-        if (size > arr.length) {
-            sizeArr = sizeArr * 3 / 2 + 1;
+    private void resize() {
+        int newSize = arr.length * 3 / 2 + 1;
+        System.out.println("newSize: " + newSize);
+        int[] newArr = new int[newSize];
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
         }
-        for (int i = index; i < arr.length; i++) {
-            arr[index] = arr[index + 1];
-        }
-        add(arr[index] = element);
-
-
+        arr = newArr;
     }
 
     @Override
@@ -45,25 +59,18 @@ public class IntArrayList implements IntList {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == value) {
                 return true;
-            } else {
-
             }
         }
+
         return false;
     }
 
 
     @Override
     public int get(int index) {
-        for (int i = 0; i < arr.length; i++) {
-            if(i == index){
-                arr[i] = arr[index];
-            }
-            if (index > size) {
-                break;
-            }
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException();
         }
-
         return arr[index];
     }
 
@@ -76,37 +83,49 @@ public class IntArrayList implements IntList {
     }
 
     @Override
-    public void remove(int index) {
-
-        arr[index] = 0;
-        arr[index] = arr[arr.length];
+    public boolean remove(int index) {
+        if (index < 0 || index > arr.length - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+        int[] tmp = arr;
+        arr = new int[tmp.length - 1];
+        System.arraycopy(tmp, 0, arr, 0, index);
+        System.arraycopy(tmp, index + 1, arr, index, tmp.length - index - 1);
         size--;
+        return true;
     }
 
     @Override
-    public void removeElement(int element) {
-        for (int i = 0; i <= arr.length; i++) {
+    public boolean removeElement(int element) {
+        for (int i = 0; i < arr.length; i++) {
             if (arr[i] == element) {
-                arr[i] = 0;
+                remove(i);
+                size--;
+                return true;
             }
-            arr[i] = arr[arr.length];
         }
-        size--;
+        return false;
     }
 
     @Override
     public void set(int index, int element) {
-        if (index > size) {
-            return;
-        }
-        for (int i = 0; i <= arr.length; i++) {
+
             arr[index] = element;
-        }
 
     }
 
     @Override
     public int size() {
         return size;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < size; i++) {
+            sb.append(arr[i]).append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
