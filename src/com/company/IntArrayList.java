@@ -56,7 +56,7 @@ public class IntArrayList implements IntList {
 
     @Override
     public boolean contains(int value) {
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (arr[i] == value) {
                 return true;
             }
